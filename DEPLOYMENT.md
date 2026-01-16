@@ -2,12 +2,19 @@
 
 This guide explains how to deploy the SPC Easter 2026 Registration application to Google Cloud Run.
 
+## IMPORTANT: Firebase Configuration Required
+
+**Before deploying, you MUST configure Firebase credentials.** The application will fail with authentication errors if Firebase environment variables are not provided during the build process.
+
+See **[FIREBASE_SETUP.md](./FIREBASE_SETUP.md)** for detailed instructions on configuring Firebase credentials.
+
 ## Prerequisites
 
 1. **Google Cloud Project**: You need an active GCP project
 2. **Google Cloud SDK**: Install from https://cloud.google.com/sdk/docs/install
 3. **Docker**: Install from https://docs.docker.com/get-docker/
-4. **Required APIs**: Enable the following APIs in your GCP project:
+4. **Firebase Project**: Set up a Firebase project and get your configuration values
+5. **Required APIs**: Enable the following APIs in your GCP project:
    - Cloud Run API
    - Cloud Build API
    - Container Registry API
@@ -26,9 +33,28 @@ export GOOGLE_CLOUD_PROJECT="your-project-id"
 gcloud config set project $GOOGLE_CLOUD_PROJECT
 ```
 
-2. **Configure Firebase** (if needed):
-   - Update `src/firebase/config.js` with your Firebase credentials
-   - Ensure Firebase configuration is in place before building
+2. **Configure Firebase Credentials** (REQUIRED):
+
+   **Option A: Using .env file (Recommended for local deployments)**
+   ```bash
+   # Copy the example file
+   cp .env.example .env
+
+   # Edit .env and add your Firebase configuration
+   # Get these values from Firebase Console > Project Settings
+   ```
+
+   **Option B: Using environment variables**
+   ```bash
+   export VITE_FIREBASE_API_KEY="your-api-key"
+   export VITE_FIREBASE_AUTH_DOMAIN="your-project.firebaseapp.com"
+   export VITE_FIREBASE_PROJECT_ID="your-project-id"
+   export VITE_FIREBASE_STORAGE_BUCKET="your-project.appspot.com"
+   export VITE_FIREBASE_MESSAGING_SENDER_ID="your-sender-id"
+   export VITE_FIREBASE_APP_ID="your-app-id"
+   ```
+
+   See [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) for detailed setup instructions including using Google Cloud Secret Manager for production deployments.
 
 ## Deployment Options
 
@@ -70,7 +96,7 @@ docker push gcr.io/$GOOGLE_CLOUD_PROJECT/spc-easter-2026
 gcloud run deploy spc-easter-2026 \
   --image gcr.io/$GOOGLE_CLOUD_PROJECT/spc-easter-2026 \
   --platform managed \
-  --region us-central1 \
+  --region us-east4 \
   --allow-unauthenticated \
   --port 8080 \
   --memory 512Mi
@@ -96,7 +122,7 @@ To require authentication:
 # Remove --allow-unauthenticated from deploy commands
 # Or update after deployment:
 gcloud run services update spc-easter-2026 \
-  --region us-central1 \
+  --region us-east4 \
   --no-allow-unauthenticated
 ```
 
@@ -108,7 +134,7 @@ To use a custom domain:
 gcloud run domain-mappings create \
   --service spc-easter-2026 \
   --domain your-domain.com \
-  --region us-central1
+  --region us-east4
 ```
 
 ## Testing Locally with Docker
@@ -135,7 +161,7 @@ Set up automatic deployments from GitHub:
 # Connect your repository
 gcloud run services update spc-easter-2026 \
   --source . \
-  --region us-central1
+  --region us-east4
 ```
 
 ### Cloud Build Triggers
@@ -152,19 +178,19 @@ Create a trigger for automatic deployments:
 
 ### View Logs
 ```bash
-gcloud run logs read spc-easter-2026 --region us-central1
+gcloud run logs read spc-easter-2026 --region us-east4
 ```
 
 ### Service Details
 ```bash
-gcloud run services describe spc-easter-2026 --region us-central1
+gcloud run services describe spc-easter-2026 --region us-east4
 ```
 
 ### Get Service URL
 ```bash
 gcloud run services describe spc-easter-2026 \
   --platform managed \
-  --region us-central1 \
+  --region us-east4 \
   --format 'value(status.url)'
 ```
 
