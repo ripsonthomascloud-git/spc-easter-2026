@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Sacrifice in Golgotha - Easter 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">The Ultimate Sacrifice in Golgotha</h1>
+                <p class="hero-subtitle">Easter 2026 - A Journey of Faith and Redemption</p>
+                <a href="#registration" class="cta-button">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About the Event</h2>
+            <div class="about-content">
+                <p>Join us for a transformative Easter experience as we reflect on the ultimate sacrifice made at Golgotha. This sacred event will bring together our community in worship, reflection, and celebration of the resurrection.</p>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <h3>When</h3>
+                        <p>Easter Sunday 2026</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Where</h3>
+                        <p>Church Main Sanctuary</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Time</h3>
+                        <p>Service begins at 9:00 AM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section id="program" class="program-section">
+        <div class="container">
+            <h2 class="section-title">Event Program</h2>
+            <div class="program-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>9:00 AM - Worship & Praise</h3>
+                        <p>Begin the morning with uplifting worship and praise songs</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>10:00 AM - The Message</h3>
+                        <p>Powerful sermon on the significance of the sacrifice at Golgotha</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>11:00 AM - Communion</h3>
+                        <p>Share in the sacred communion service</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>11:30 AM - Fellowship</h3>
+                        <p>Join us for refreshments and community fellowship</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="registration-section">
+        <div class="container">
+            <h2 class="section-title">Event Registration</h2>
+            <p class="registration-intro">Pre-register for the Easter 2026 event to help us prepare for your attendance</p>
+
+            <form id="registrationForm" class="registration-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adults">Number of Adults</label>
+                        <input type="number" id="adults" name="adults" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="children">Number of Children</label>
+                        <input type="number" id="children" name="children" min="0" value="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialNeeds">Special Needs or Requests</label>
+                    <textarea id="specialNeeds" name="specialNeeds" rows="4" placeholder="Please let us know if you have any special requirements"></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <span>I would like to receive updates about future church events</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <span class="button-text">Complete Registration</span>
+                    <span class="button-loader" style="display: none;"></span>
+                </button>
+
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Church Event - The Ultimate Sacrifice in Golgotha. All rights reserved.</p>
+            <p>For questions, please contact us at info@church.org</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

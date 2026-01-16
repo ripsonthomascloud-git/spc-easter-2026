@@ -1,0 +1,226 @@
+@import './animations.css';
+
+.ticketSection {
+  padding: 80px 20px;
+  background-color: var(--background-section);
+}
+
+.visible {
+  /* Class used to trigger animations when section is visible */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 15px;
+  opacity: 0;
+}
+
+.visible .sectionTitle {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: 0s;
+}
+
+.sectionSubtitle {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 50px;
+  opacity: 0;
+}
+
+.visible .sectionSubtitle {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.ticketCard {
+  background: var(--background-light);
+  border-radius: 12px;
+  padding: 35px 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 2px solid transparent;
+  opacity: 0;
+}
+
+.visible .ticketCard {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.ticketCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-color: var(--secondary-color);
+}
+
+.ticketCard.popular {
+  border-color: var(--secondary-color);
+  box-shadow: 0 6px 12px rgba(212, 175, 55, 0.3);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--secondary-color), #FFD700);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.ticketTitle {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.priceTag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.priceNote {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 5px;
+}
+
+.featureList {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.feature {
+  padding: 12px 0;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+}
+
+.checkmark {
+  color: var(--success-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.selectButton {
+  width: 100%;
+  padding: 15px 30px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.selectButton:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.popularButton {
+  background: linear-gradient(135deg, var(--secondary-color), #FFD700);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.popularButton:hover {
+  background: linear-gradient(135deg, #FFD700, var(--secondary-color));
+  animation: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  .ticketGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ticketSection {
+    padding: 60px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1rem;
+  }
+
+  .ticketGrid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .ticketTitle {
+    font-size: 1.5rem;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticketSection {
+    padding: 40px 15px;
+  }
+
+  .ticketCard {
+    padding: 25px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.7rem;
+  }
+
+  .feature {
+    font-size: 0.95rem;
+  }
+
+  .selectButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+}

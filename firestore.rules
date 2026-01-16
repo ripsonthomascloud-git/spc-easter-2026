@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Registrations collection
+    match /registrations/{registrationId} {
+      // Allow anyone to create a registration
+      allow create: if request.resource.data.keys().hasAll([
+        'firstName', 'lastName', 'email'
+      ]) && request.resource.data.firstName is string
+         && request.resource.data.lastName is string
+         && request.resource.data.email is string
+         && request.resource.data.email.matches('.*@.*\\..*');
+
+      // Only authenticated users (admins) can read registrations
+      allow read: if request.auth != null;
+
+      // Prevent updates and deletes from public
+      allow update, delete: if request.auth != null;
+    }
+  }
+}

@@ -1,0 +1,305 @@
+@import './animations.css';
+
+.sponsorSection {
+  padding: 80px 20px;
+  background-color: var(--background-light);
+}
+
+.visible {
+  /* Class used to trigger animations when section is visible */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 15px;
+  opacity: 0;
+}
+
+.visible .sectionTitle {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: 0s;
+}
+
+.sectionSubtitle {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+}
+
+.visible .sectionSubtitle {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.sponsorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.sponsorCard {
+  background: var(--background-light);
+  border-radius: 12px;
+  padding: 35px 28px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 2px solid transparent;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.visible .sponsorCard {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.sponsorCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.sponsorCard:hover::before {
+  transform: scaleX(1);
+}
+
+.sponsorCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Theme Colors */
+.gold {
+  border-color: #FFD700;
+}
+
+.gold::before {
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+}
+
+.platinum {
+  border-color: #E5E4E2;
+}
+
+.platinum::before {
+  background: linear-gradient(90deg, #E5E4E2, #C0C0C0);
+}
+
+.silver {
+  border-color: #C0C0C0;
+}
+
+.silver::before {
+  background: linear-gradient(90deg, #C0C0C0, #A8A8A8);
+}
+
+.bronze {
+  border-color: #CD7F32;
+}
+
+.bronze::before {
+  background: linear-gradient(90deg, #CD7F32, #B8860B);
+}
+
+.tierHeader {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.iconWrapper {
+  margin-bottom: 15px;
+}
+
+.tierIcon {
+  font-size: 3rem;
+  display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.tierTitle {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.tierAmount {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.benefitList {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.benefit {
+  padding: 10px 0;
+  color: var(--text-dark);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.bulletPoint {
+  color: var(--secondary-color);
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sponsorButton {
+  width: 100%;
+  padding: 14px 28px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sponsorButton:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.contactCTA {
+  text-align: center;
+  margin-top: 60px;
+  padding: 30px;
+  background-color: var(--background-section);
+  border-radius: 12px;
+  opacity: 0;
+}
+
+.visible .contactCTA {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.ctaText {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.ctaLink {
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--secondary-color);
+  transition: all 0.3s ease;
+  padding-bottom: 2px;
+}
+
+.ctaLink:hover {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  .sponsorGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sponsorSection {
+    padding: 60px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1rem;
+  }
+
+  .sponsorGrid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .tierIcon {
+    font-size: 2.5rem;
+  }
+
+  .tierTitle {
+    font-size: 1.4rem;
+  }
+
+  .tierAmount {
+    font-size: 1.1rem;
+  }
+
+  .contactCTA {
+    padding: 25px 20px;
+  }
+
+  .ctaText {
+    font-size: 1.1rem;
+  }
+
+  .ctaLink {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sponsorSection {
+    padding: 40px 15px;
+  }
+
+  .sponsorCard {
+    padding: 25px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.7rem;
+  }
+
+  .benefit {
+    font-size: 0.9rem;
+  }
+
+  .sponsorButton {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+
+  .contactCTA {
+    margin-top: 40px;
+  }
+}
