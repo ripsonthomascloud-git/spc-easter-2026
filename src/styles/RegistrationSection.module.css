@@ -176,6 +176,124 @@
   }
 }
 
+/* Payment Option Selection Styles */
+.paymentOptionSection {
+  margin-bottom: 30px;
+}
+
+.paymentOptionSection h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.paymentOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.paymentOptionCard {
+  position: relative;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: white;
+  display: block;
+}
+
+.paymentOptionCard:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.paymentOptionCard.selected {
+  border-color: var(--primary-color);
+  background-color: #f0f7ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.paymentOptionCard input[type="radio"] {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.optionContent {
+  padding-right: 30px;
+}
+
+.optionContent strong {
+  display: block;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.optionContent p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Payment Summary Styles */
+.paymentSummary {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border: 2px solid #e9ecef;
+}
+
+.paymentSummary h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.summaryRow:last-child {
+  border-bottom: none;
+}
+
+.totalRow {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 2px solid var(--primary-color);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+/* Payment Section Styles */
+.paymentSection {
+  background-color: #fff8e1;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border: 2px solid #ffe082;
+}
+
+.paymentSection h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
 @media (max-width: 768px) {
   .sectionTitle {
     font-size: 2rem;
@@ -187,6 +305,10 @@
 
   .registrationForm {
     padding: 30px 20px;
+  }
+
+  .paymentOptions {
+    grid-template-columns: 1fr;
   }
 }
 

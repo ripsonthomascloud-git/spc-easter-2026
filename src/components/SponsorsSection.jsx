@@ -7,11 +7,11 @@ const SponsorsSection = () => {
 
   const sponsorTiers = [
     {
-      tier: 'Grant Sponsor',
+      tier: 'Grand Sponsor',
       icon: '👑',
       amount: '$10,000',
       benefits: [
-        'Upto VIP seats',
+        'Upto 6 VIP seats',
         'Logo on all materials',
         'Meet & greet access',
         'Recognition in service'
@@ -80,7 +80,7 @@ const SponsorsSection = () => {
             Interested in a custom sponsorship package?
           </p>
           <a
-            href="mailto:info@spcchurch.org"
+            href="mailto:stpmtcdallas@outlook.com"
             className={styles.ctaLink}
           >
             Contact us at stpmtcdallas@outlook.com
