@@ -66,7 +66,7 @@ const Admin = () => {
   const formatTicketType = (type) => {
     const types = {
       'general-admission': 'General Admission',
-      'vip-experience': 'VIP Experience Single',
+      'vip-single': 'VIP Experience Single',
       'family-package': 'Family Package'
     };
     return types[type] || type;
@@ -187,7 +187,7 @@ const Admin = () => {
         <div className={styles.statCard}>
           <h3>VIP Tickets</h3>
           <p className={styles.statNumber}>
-            {registrations.filter(r => r.ticketType === 'vip-experience').length}
+            {registrations.filter(r => r.ticketType === 'vip-single').length}
           </p>
         </div>
       </div>
@@ -209,7 +209,7 @@ const Admin = () => {
         >
           <option value="all">All Ticket Types</option>
           <option value="general-admission">General Admission</option>
-          <option value="vip-experience">VIP Experience</option>
+          <option value="vip-single">VIP Experience</option>
           <option value="family-package">Family Package</option>
         </select>
         <button onClick={exportToCSV} className={styles.exportButton}>

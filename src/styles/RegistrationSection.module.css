@@ -243,6 +243,42 @@
   line-height: 1.4;
 }
 
+/* Payment Instructions Styles */
+.paymentInstructions {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border: 2px solid #e9ecef;
+}
+
+.paymentInstructions h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.instructionsContent p {
+  padding: 10px 0;
+  border-bottom: 1px solid #dee2e6;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.instructionsContent p:last-child {
+  border-bottom: none;
+}
+
+.creditCardNote {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 2px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  font-style: italic;
+}
+
 /* Payment Summary Styles */
 .paymentSummary {
   background-color: #f8f9fa;

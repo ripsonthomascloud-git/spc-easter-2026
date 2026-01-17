@@ -6,7 +6,7 @@ import styles from '../styles/RegistrationSection.module.css';
 const RegistrationSection = () => {
   const { loading, error, success, submitRegistration, resetState } = useFirebase();
   const formMessageRef = useRef(null);
-  const [paymentOption, setPaymentOption] = React.useState('pay-later'); // 'pay-now' or 'pay-later'
+  const [paymentMethod, setPaymentMethod] = React.useState('zelle'); // 'zelle', 'venmo', or 'credit-card'
 
   const initialFormState = {
     firstName: '',
@@ -14,14 +14,9 @@ const RegistrationSection = () => {
     email: '',
     phone: '',
     ticketType: 'general-admission',
-    adults: 1,
-    children: 0,
+    tickets: 1,
     specialNeeds: '',
-    newsletter: false,
-    cardholderName: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvv: ''
+    newsletter: false
   };
 
   const {
@@ -36,20 +31,20 @@ const RegistrationSection = () => {
   // Calculate total payment
   const calculateTotal = () => {
     const ticketPrices = {
-      'general-admission': 50,
-      'vip-experience': 125,
-      'family-package': 150,
+      'general-admission': 75,
+      'vip-single': 150,
+      'family-package': 225,
       'vip-family-package': 500
     };
 
     const basePrice = ticketPrices[formData.ticketType] || 0;
-    const totalPeople = parseInt(formData.adults) + parseInt(formData.children);
+    const numTickets = parseInt(formData.tickets);
 
-    // For family packages, price is flat. For individual tickets, multiply by total people
+    // For family packages, price is flat. For individual tickets, multiply by number of tickets
     if (formData.ticketType === 'family-package' || formData.ticketType === 'vip-family-package') {
       return basePrice;
     } else {
-      return basePrice * totalPeople;
+      return basePrice * numTickets;
     }
   };
 
@@ -62,26 +57,24 @@ const RegistrationSection = () => {
 
     resetState();
 
-    // Prepare submission data with payment option and total
+    // Prepare submission data with payment method and total
     const submissionData = {
       ...formData,
-      paymentOption: paymentOption,
+      paymentMethod: paymentMethod,
       totalAmount: calculateTotal()
     };
-
-    // If paying later, don't send credit card details
-    if (paymentOption === 'pay-later') {
-      delete submissionData.cardholderName;
-      delete submissionData.cardNumber;
-      delete submissionData.expiryDate;
-      delete submissionData.cvv;
-    }
 
     const result = await submitRegistration(submissionData);
 
     if (result.success) {
+      // If credit card is selected, redirect to external payment URL after saving
+      if (paymentMethod === 'credit-card') {
+        window.location.href = 'https://www.zeffy.com/en-US/ticketing/the-ultimate-sacrifice-in-golgotha';
+        return;
+      }
+
       resetForm();
-      setPaymentOption('pay-later'); // Reset to default
+      setPaymentMethod('zelle'); // Reset to default
 
       // Scroll to success message
       setTimeout(() => {
@@ -164,36 +157,24 @@ const RegistrationSection = () => {
               onChange={handleChange}
               required
             >
-              <option value="general-admission">General Admission - $50</option>
-              <option value="vip-experience">VIP Experience Single - $125</option>
-              <option value="family-package">Family Package - $150 per family</option>
+              <option value="general-admission">General Admission - $75</option>
+              <option value="vip-single">VIP Experience Single - $150</option>
+              <option value="family-package">Family Package - $225 per family</option>
               <option value="vip-family-package">VIP Family Package - $500 per family</option>
             </select>
           </div>
 
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <label htmlFor="adults">Number of Adults</label>
-              <input
-                type="number"
-                id="adults"
-                name="adults"
-                value={formData.adults}
-                onChange={handleChange}
-                min="1"
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="children">Number of Children</label>
-              <input
-                type="number"
-                id="children"
-                name="children"
-                value={formData.children}
-                onChange={handleChange}
-                min="0"
-              />
-            </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="tickets">Number of Tickets *</label>
+            <input
+              type="number"
+              id="tickets"
+              name="tickets"
+              value={formData.tickets}
+              onChange={handleChange}
+              min="1"
+              required
+            />
           </div>
 
           <div className={styles.formGroup}>
@@ -208,37 +189,36 @@ const RegistrationSection = () => {
             />
           </div>
 
-          {/* Payment Option Selection */}
-          <div className={styles.paymentOptionSection}>
-            <h3>Payment Options</h3>
-            <div className={styles.paymentOptions}>
-              <label className={`${styles.paymentOptionCard} ${paymentOption === 'pay-now' ? styles.selected : ''}`}>
-                <input
-                  type="radio"
-                  name="paymentOption"
-                  value="pay-now"
-                  checked={paymentOption === 'pay-now'}
-                  onChange={(e) => setPaymentOption(e.target.value)}
-                />
-                <div className={styles.optionContent}>
-                  <strong>Complete Registration - Pay Now</strong>
-                  <p>Pay securely online and confirm your spot immediately</p>
-                </div>
-              </label>
+          {/* Payment Method Selection */}
+          <div className={styles.formGroup}>
+            <label htmlFor="paymentMethod">Payment Method *</label>
+            <select
+              id="paymentMethod"
+              name="paymentMethod"
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              required
+            >
+              <option value="zelle">Zelle</option>
+              <option value="venmo">Venmo</option>
+              <option value="cash">Cash</option>
+              <option value="check">Check</option>
+              <option value="credit-card">Credit Card</option>
+            </select>
+          </div>
 
-              <label className={`${styles.paymentOptionCard} ${paymentOption === 'pay-later' ? styles.selected : ''}`}>
-                <input
-                  type="radio"
-                  name="paymentOption"
-                  value="pay-later"
-                  checked={paymentOption === 'pay-later'}
-                  onChange={(e) => setPaymentOption(e.target.value)}
-                />
-                <div className={styles.optionContent}>
-                  <strong>Register Now - Pay Later</strong>
-                  <p>Reserve your spot and pay at the event or later</p>
-                </div>
-              </label>
+          {/* Payment Instructions */}
+          <div className={styles.paymentInstructions}>
+            <h3>Payment Instructions</h3>
+            <div className={styles.instructionsContent}>
+              <p><strong>Zelle:</strong> stpaulschoir.treasurer@gmail.com</p>
+              <p><strong>Venmo:</strong> @stpaulschoir</p>
+              <p><strong>Cash/Check:</strong> Pay in Person, payable to <b>St. Pauls MTC Choir</b></p>
+              {paymentMethod === 'credit-card' && (
+                <p className={styles.creditCardNote}>
+                  <em><strong>Credit Card:</strong>You will be redirected to our secure payment portal to complete your credit card payment.</em>
+                </p>
+              )}
             </div>
           </div>
 
@@ -248,12 +228,12 @@ const RegistrationSection = () => {
             <div className={styles.summaryRow}>
               <span>Ticket Type:</span>
               <span>{formData.ticketType === 'general-admission' ? 'General Admission' :
-                     formData.ticketType === 'vip-experience' ? 'VIP Experience Single' :
+                     formData.ticketType === 'vip-single' ? 'VIP Experience Single' :
                      formData.ticketType === 'family-package' ? 'Family Package' : 'VIP Family Package'}</span>
             </div>
             <div className={styles.summaryRow}>
-              <span>Number of People:</span>
-              <span>{parseInt(formData.adults) + parseInt(formData.children)} ({formData.adults} Adults, {formData.children} Children)</span>
+              <span>Number of Tickets:</span>
+              <span>{formData.tickets}</span>
             </div>
             <div className={`${styles.summaryRow} ${styles.totalRow}`}>
               <span><strong>Total Amount:</strong></span>
@@ -261,96 +241,10 @@ const RegistrationSection = () => {
             </div>
           </div>
 
-          {/* Credit Card Details - Only show for Pay Now option */}
-          {paymentOption === 'pay-now' && (
-            <div className={styles.paymentSection}>
-              <h3>Payment Information</h3>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="cardholderName">Cardholder Name *</label>
-                <input
-                  type="text"
-                  id="cardholderName"
-                  name="cardholderName"
-                  value={formData.cardholderName}
-                  onChange={handleChange}
-                  required
-                  placeholder="Name as it appears on card"
-                  className={errors.cardholderName ? styles.inputError : ''}
-                />
-                {errors.cardholderName && <span className={styles.errorText}>{errors.cardholderName}</span>}
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="cardNumber">Card Number *</label>
-                <input
-                  type="text"
-                  id="cardNumber"
-                  name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleChange}
-                  required
-                  placeholder="1234 5678 9012 3456"
-                  maxLength="19"
-                  className={errors.cardNumber ? styles.inputError : ''}
-                />
-                {errors.cardNumber && <span className={styles.errorText}>{errors.cardNumber}</span>}
-              </div>
-
-              <div className={styles.formRow}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="expiryDate">Expiry Date *</label>
-                  <input
-                    type="text"
-                    id="expiryDate"
-                    name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleChange}
-                    required
-                    placeholder="MM/YY"
-                    maxLength="5"
-                    className={errors.expiryDate ? styles.inputError : ''}
-                  />
-                  {errors.expiryDate && <span className={styles.errorText}>{errors.expiryDate}</span>}
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="cvv">CVV *</label>
-                  <input
-                    type="text"
-                    id="cvv"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleChange}
-                    required
-                    placeholder="123"
-                    maxLength="4"
-                    className={errors.cvv ? styles.inputError : ''}
-                  />
-                  {errors.cvv && <span className={styles.errorText}>{errors.cvv}</span>}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* <div className={`${styles.formGroup} ${styles.checkboxGroup}`}>
-            <label>
-              <input
-                type="checkbox"
-                id="newsletter"
-                name="newsletter"
-                checked={formData.newsletter}
-                onChange={handleChange}
-              />
-              <span>I would like to receive updates about future church events</span>
-            </label> */}
-          {/* </div> */}
 
           <button type="submit" className={styles.submitButton} disabled={loading}>
             <span className={styles.buttonText}>
-              {loading
-                ? (paymentOption === 'pay-now' ? 'Processing Payment...' : 'Submitting Registration...')
-                : (paymentOption === 'pay-now' ? 'Complete Registration - Pay Now' : 'Register Now - Pay Later')
-              }
+              {loading ? 'Processing...' : 'Complete Registration'}
             </span>
             {loading && <span className={styles.buttonLoader}></span>}
           </button>

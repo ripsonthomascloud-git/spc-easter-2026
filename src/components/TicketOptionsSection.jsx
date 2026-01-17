@@ -8,7 +8,7 @@ const TicketOptionsSection = () => {
   const tickets = [
     {
       title: 'General Admission',
-      price: '$50',
+      price: '$75',
       features: [
         'Single Admission'
       ],
@@ -17,7 +17,7 @@ const TicketOptionsSection = () => {
     },
     {
       title: 'Family Package',
-      price: '$150',
+      price: '$225',
       features: [
         'Admits 4 people'
       ],
@@ -25,17 +25,17 @@ const TicketOptionsSection = () => {
       delay: 0.3
     },
     {
-      title: 'VIP Experience',
-      price: '$125',
+      title: 'VIP Single',
+      price: '$150',
       features: [
-        'Premium Seating'
+        'Premium Seating, Admits 1'
       ],
       isPopular: false,
       delay: 0.15
     },
     ,
     {
-      title: 'VIP Family Package',
+      title: 'VIP Family ',
       price: '$500',
       features: [
         'Premium Family Seating ,Admits 4'
