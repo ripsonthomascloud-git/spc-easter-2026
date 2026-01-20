@@ -8,7 +8,7 @@ const AboutSection = () => {
 
   const eventDetails = [
     { title: 'When', description: 'April 4th 2026' },
-    { title: 'Where', description: 'Sharon Event Center, Mesquite' },
+    { title: 'Where', description: 'Sharon Event Center, 940 Barnes Bridge Rd, Mesquite TX 75150' },
     { title: 'Time', description: 'Show begins at 6:00 PM' }
   ];
 

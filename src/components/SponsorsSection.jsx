@@ -9,12 +9,12 @@ const SponsorsSection = () => {
     {
       tier: 'Grand Sponsor',
       icon: '👑',
-      amount: '$10,000',
+      amount: '$5,000',
       benefits: [
-        'Upto 6 VIP seats',
-        'Logo on all materials',
-        'Meet & greet access',
-        'Recognition in service'
+        'VIP Seats for the family',
+        '5 minutes stage time',
+        '5 mins ad time on LED wall',
+        'Appreciation Plaque'
       ],
       themeColor: 'gold',
       delay: 0
@@ -22,12 +22,12 @@ const SponsorsSection = () => {
     {
       tier: 'Platinum Sponsor',
       icon: '💎',
-      amount: '$5000',
+      amount: '$3000',
       benefits: [
-        '6 VIP seats',
-        'Logo on programs',
-        'Slides',
-        'Social media mention'
+        'Upto 4 VIP seats',
+        '3 minutes stage time',
+        'Static slides',
+        'Website mention'
       ],
       themeColor: 'platinum',
       delay: 0.15
@@ -37,10 +37,10 @@ const SponsorsSection = () => {
       icon: '⭐',
       amount: '$2000',
       benefits: [
-        '4 VIP seats',
-        'Logo on programs',
+        'Upto 2 VIP seats',
+        'Flier priority mentions',
         'Thank you mention',
-        'Event newsletter feature'
+        'Event booklet half page'
       ],
       themeColor: 'silver',
       delay: 0.3
@@ -50,10 +50,10 @@ const SponsorsSection = () => {
       icon: '🏅',
       amount: '$1000',
       benefits: [
-        '2 priority seats',
-        'Name in program',
-        'Thank you certificate',
-        'Event updates'
+        '2 Priority seats',
+        '1 slide',
+        'Flier mentions',
+        'Event booklet quarter page'
       ],
       themeColor: 'bronze',
       delay: 0.45

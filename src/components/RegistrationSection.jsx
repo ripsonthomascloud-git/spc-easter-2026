@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useFirebase } from '../hooks/useFirebase';
 import { useFormValidation } from '../hooks/useFormValidation';
+import TicketModal from './TicketModal';
 import styles from '../styles/RegistrationSection.module.css';
 
 const RegistrationSection = () => {
   const { loading, error, success, submitRegistration, resetState } = useFirebase();
   const formMessageRef = useRef(null);
-  const [paymentMethod, setPaymentMethod] = React.useState('zelle'); // 'zelle', 'venmo', or 'credit-card'
+  const [paymentMethod, setPaymentMethod] = useState('zelle'); // 'zelle', 'venmo', or 'credit-card'
+  const [showTicketModal, setShowTicketModal] = useState(false);
+  const [ticketData, setTicketData] = useState(null);
+  const [pendingCreditCardRedirect, setPendingCreditCardRedirect] = useState(false);
 
   const initialFormState = {
     firstName: '',
@@ -67,22 +71,42 @@ const RegistrationSection = () => {
     const result = await submitRegistration(submissionData);
 
     if (result.success) {
-      // If credit card is selected, redirect to external payment URL after saving
+      // Store ticket data with full name for the ticket
+      const ticketFormData = {
+        ...submissionData,
+        name: `${formData.firstName} ${formData.lastName}`
+      };
+
+      setTicketData({ id: result.id, formData: ticketFormData });
+      setShowTicketModal(true);
+
+      // If credit card is selected, mark for redirect after modal closes
       if (paymentMethod === 'credit-card') {
-        window.location.href = 'https://www.zeffy.com/en-US/ticketing/the-ultimate-sacrifice-in-golgotha';
-        return;
+        setPendingCreditCardRedirect(true);
       }
-
-      resetForm();
-      setPaymentMethod('zelle'); // Reset to default
-
-      // Scroll to success message
-      setTimeout(() => {
-        if (formMessageRef.current) {
-          formMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }, 100);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowTicketModal(false);
+    setTicketData(null);
+
+    // If credit card redirect is pending, redirect now
+    if (pendingCreditCardRedirect) {
+      window.location.href = 'https://www.zeffy.com/en-US/ticketing/the-ultimate-sacrifice-in-golgotha';
+      return;
+    }
+
+    // Otherwise, reset form and show success message
+    resetForm();
+    setPaymentMethod('zelle');
+
+    // Scroll to success message
+    setTimeout(() => {
+      if (formMessageRef.current) {
+        formMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 100);
   };
 
   return (
@@ -211,7 +235,7 @@ const RegistrationSection = () => {
           <div className={styles.paymentInstructions}>
             <h3>Payment Instructions</h3>
             <div className={styles.instructionsContent}>
-              <p><strong>Zelle:</strong> stpaulschoir.treasurer@gmail.com</p>
+              <p><strong>Zelle:</strong> stpaulschoir.treasurer@ gmail.com</p>
               <p><strong>Venmo:</strong> @stpaulschoir</p>
               <p><strong>Cash/Check:</strong> Pay in Person, payable to <b>St. Pauls MTC Choir</b></p>
               {paymentMethod === 'credit-card' && (
@@ -261,6 +285,13 @@ const RegistrationSection = () => {
           )}
         </form>
       </div>
+
+      <TicketModal
+        isOpen={showTicketModal}
+        onClose={handleCloseModal}
+        registrationId={ticketData?.id}
+        formData={ticketData?.formData}
+      />
     </section>
   );
 };

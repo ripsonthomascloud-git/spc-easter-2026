@@ -1,0 +1,429 @@
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content Container */
+.modalContent {
+  background-color: var(--background-light);
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 95vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Close Button */
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--text-light);
+  transition: all 0.2s ease;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.closeButton:hover {
+  color: var(--text-dark);
+  background-color: var(--background-section);
+}
+
+/* Modal Header */
+.modalHeader {
+  text-align: center;
+  padding: 40px 40px 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.modalHeader h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-family: 'Cinzel Decorative', serif;
+}
+
+.modalHeader p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Error Message */
+.errorMessage {
+  margin: 20px 40px;
+  padding: 15px;
+  background-color: #ffebee;
+  color: var(--error-color);
+  border-radius: 10px;
+  border-left: 4px solid var(--error-color);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+  border: 4px solid var(--background-section);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ticket Container */
+.ticketContainer {
+  background-color: white;
+  margin: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  max-width: 800px;
+  width: 800px;
+  height: 1200px;
+  position: relative;
+}
+
+/* Ticket Header */
+.ticketHeader {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 40px 30px;
+  text-align: center;
+  border-bottom: 3px dashed var(--secondary-color);
+}
+
+.eventName {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  font-family: 'Cinzel Decorative', serif;
+  line-height: 1.3;
+}
+
+.eventDetails {
+  margin-top: 15px;
+}
+
+.eventDate {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--secondary-color);
+}
+
+.eventTime {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.eventLocation {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* Ticket Body */
+.ticketBody {
+  padding: 40px 30px;
+  background-color: white;
+}
+
+/* QR Code Section */
+.qrCodeSection {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 30px;
+  background-color: var(--background-section);
+  border-radius: 15px;
+}
+
+.qrCode {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qrLabel {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Attendee Details */
+.attendeeDetails {
+  background-color: var(--background-section);
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailValue {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  text-align: right;
+}
+
+/* Ticket Footer */
+.ticketFooter {
+  padding: 30px;
+  background-color: var(--background-section);
+  text-align: center;
+  border-top: 3px dashed var(--secondary-color);
+}
+
+.ticketId {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  font-family: monospace;
+  letter-spacing: 0.5px;
+}
+
+.footerNote {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* Modal Actions */
+.modalActions {
+  display: flex;
+  gap: 15px;
+  padding: 30px 40px 40px;
+  justify-content: center;
+}
+
+/* Download Button */
+.downloadButton {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.downloadButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+}
+
+.downloadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Close Button Secondary */
+.closeButtonSecondary {
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 2px solid var(--border-color);
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.closeButtonSecondary:hover {
+  background-color: var(--background-section);
+  border-color: var(--text-light);
+}
+
+/* Print Styles */
+@media print {
+  .modalOverlay {
+    background: white;
+    position: static;
+  }
+
+  .modalContent {
+    box-shadow: none;
+    max-height: none;
+  }
+
+  .modalHeader,
+  .modalActions,
+  .closeButton {
+    display: none;
+  }
+
+  .ticketContainer {
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modalContent {
+    margin: 10px;
+    border-radius: 15px;
+  }
+
+  .modalHeader {
+    padding: 30px 20px 15px;
+  }
+
+  .modalHeader h2 {
+    font-size: 1.5rem;
+  }
+
+  .ticketContainer {
+    margin: 20px;
+    width: calc(100% - 40px);
+    height: auto;
+    min-height: 600px;
+  }
+
+  .eventName {
+    font-size: 1.6rem;
+  }
+
+  .eventDate {
+    font-size: 1.2rem;
+  }
+
+  .eventTime,
+  .eventLocation {
+    font-size: 1rem;
+  }
+
+  .ticketHeader,
+  .ticketBody,
+  .ticketFooter {
+    padding: 20px;
+  }
+
+  .qrCodeSection {
+    padding: 20px;
+  }
+
+  .attendeeDetails {
+    padding: 20px;
+  }
+
+  .modalActions {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .downloadButton,
+  .closeButtonSecondary {
+    width: 100%;
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .detailValue {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalHeader h2 {
+    font-size: 1.3rem;
+  }
+
+  .eventName {
+    font-size: 1.4rem;
+  }
+
+  .qrCode {
+    width: 150px;
+    height: 150px;
+  }
+}

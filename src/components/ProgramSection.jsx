@@ -24,8 +24,8 @@ const ProgramSection = () => {
     },
     {
       time: '9:00 PM',
-      title: 'Dinner and Fellowship',
-      description: 'Join us for refreshments and fellowship'
+      title: 'Show Ends',
+      description: 'We truly believe you will have experienced the Ultimate Sacrifice ever made'
     }
   ];
 

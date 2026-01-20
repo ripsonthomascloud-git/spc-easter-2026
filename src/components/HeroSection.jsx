@@ -15,7 +15,9 @@ const HeroSection = () => {
       <div className={styles.container}>
         <div className={styles.heroContent}>
           <p className={styles.heroSubtitle}>St. Pauls Marthoma Church, Dallas Presents</p>
-          <h1 className={styles.heroTitle}>The Ultimate Sacrifice in Golgotha</h1>
+          <h1 className={styles.heroTitle}>The Ultimate Sacrifice on Golgotha</h1>
+           <p className={styles.heroTitle}>ഗോൽഗോഥായിലെ പരമയാഗം</p>
+
           <a href="#registration" className={styles.ctaButton} onClick={scrollToRegistration}>
             Register Now
           </a>

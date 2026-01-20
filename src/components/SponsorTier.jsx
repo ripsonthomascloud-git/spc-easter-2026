@@ -10,7 +10,7 @@ const SponsorTier = ({
   delay = 0
 }) => {
   const handleBecomeSponsor = () => {
-    const email = 'info@spcchurch.org';
+    const email = 'stpmtcdallas@outlook.com';
     const subject = `${tier} Sponsorship Inquiry - Easter 2026`;
     const body = `Hello,\n\nI am interested in becoming a ${tier} for the SPC Easter 2026 event.\n\nPlease provide more information about the sponsorship opportunities.\n\nThank you!`;
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

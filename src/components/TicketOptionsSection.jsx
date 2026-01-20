@@ -8,7 +8,7 @@ const TicketOptionsSection = () => {
   const tickets = [
     {
       title: 'General Admission',
-      price: '$75',
+      price: '$60',
       features: [
         'Single Admission'
       ],
@@ -17,7 +17,7 @@ const TicketOptionsSection = () => {
     },
     {
       title: 'Family Package',
-      price: '$225',
+      price: '$200',
       features: [
         'Admits 4 people'
       ],
