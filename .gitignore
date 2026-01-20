@@ -30,3 +30,9 @@ dist-ssr
 # Firebase
 .firebase
 *.cache
+
+# Wallet certificates and keys
+functions/certificates/**/*.pem
+functions/certificates/**/*.p12
+functions/certificates/**/*.json
+!functions/certificates/**/README.md

@@ -1,0 +1,23 @@
+{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.com.spc.easter2026",
+  "serialNumber": "PLACEHOLDER",
+  "teamIdentifier": "YOUR_TEAM_ID",
+  "organizationName": "SPC Easter 2026",
+  "description": "SPC Easter 2026 Event Ticket",
+  "logoText": "SPC Easter 2026",
+  "foregroundColor": "rgb(255, 255, 255)",
+  "backgroundColor": "rgb(139, 69, 19)",
+  "labelColor": "rgb(255, 215, 0)",
+  "eventTicket": {
+    "primaryFields": [],
+    "secondaryFields": [],
+    "auxiliaryFields": [],
+    "backFields": []
+  },
+  "barcode": {
+    "message": "PLACEHOLDER",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  }
+}

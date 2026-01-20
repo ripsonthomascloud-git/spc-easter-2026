@@ -1,11 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTicketGenerator } from '../hooks/useTicketGenerator';
 import { EVENT_CONFIG, formatCurrency, getTicketTypeDisplay } from '../utils/ticketGenerator';
+import { detectPlatform, supportsWallet, addToAppleWallet, addToGoogleWallet } from '../utils/walletUtils';
 import styles from '../styles/TicketModal.module.css';
 
 const TicketModal = ({ isOpen, onClose, registrationId, formData }) => {
   const { generateTicket, downloadTicket, isGenerating, qrCodeDataUrl, ticketData, error } = useTicketGenerator();
   const ticketRef = useRef(null);
+  const [platform, setPlatform] = useState(null);
+  const [isAddingToWallet, setIsAddingToWallet] = useState(false);
+
+  useEffect(() => {
+    // Detect platform on mount
+    setPlatform(detectPlatform());
+  }, []);
 
   useEffect(() => {
     if (isOpen && registrationId && formData) {
@@ -44,6 +52,26 @@ const TicketModal = ({ isOpen, onClose, registrationId, formData }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
+    }
+  };
+
+  const handleAddToWallet = async () => {
+    if (!ticketData || !qrCodeDataUrl) {
+      return;
+    }
+
+    setIsAddingToWallet(true);
+
+    try {
+      if (platform === 'ios') {
+        await addToAppleWallet(ticketData, qrCodeDataUrl);
+      } else if (platform === 'android') {
+        await addToGoogleWallet(ticketData, qrCodeDataUrl);
+      }
+    } catch (err) {
+      console.error('Error adding to wallet:', err);
+    } finally {
+      setIsAddingToWallet(false);
     }
   };
 
@@ -141,6 +169,33 @@ const TicketModal = ({ isOpen, onClose, registrationId, formData }) => {
               >
                 {isGenerating ? 'Generating...' : 'Download Ticket'}
               </button>
+
+              {supportsWallet() && (
+                <button
+                  className={styles.walletButton}
+                  onClick={handleAddToWallet}
+                  disabled={isGenerating || isAddingToWallet}
+                >
+                  {isAddingToWallet ? (
+                    'Adding...'
+                  ) : platform === 'ios' ? (
+                    <>
+                      <svg className={styles.walletIcon} width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.17 3.25q.33 0 .59.25.25.25.25.59v15.82q0 .34-.25.59t-.59.25H2.83q-.34 0-.59-.25t-.25-.59V4.09q0-.34.25-.59t.59-.25H6V2h12v1.25zM8 7.5v9h8v-9H8zm-5 9V6H5v10.5H3zm16 0V6h2v10.5h-2z"/>
+                      </svg>
+                      Add to Apple Wallet
+                    </>
+                  ) : (
+                    <>
+                      <svg className={styles.walletIcon} width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.17 3.25q.33 0 .59.25.25.25.25.59v15.82q0 .34-.25.59t-.59.25H2.83q-.34 0-.59-.25t-.25-.59V4.09q0-.34.25-.59t.59-.25H6V2h12v1.25zM8 7.5v9h8v-9H8zm-5 9V6H5v10.5H3zm16 0V6h2v10.5h-2z"/>
+                      </svg>
+                      Add to Google Wallet
+                    </>
+                  )}
+                </button>
+              )}
+
               <button
                 className={styles.closeButtonSecondary}
                 onClick={onClose}
