@@ -11,12 +11,15 @@ const SponsorsSection = () => {
       icon: '👑',
       amount: '$5,000',
       benefits: [
-        'VIP Seats for the family',
-        '5 minutes stage time',
-        '5 mins ad time on LED wall',
-        'Appreciation Plaque'
+        'VIP tickets(flexible per family)',
+        'Stage Time(5 mins)',
+        'Flex/Stall Outside event venue',
+        'Slideshow Promotion',
+        'Social Media & Printed Material Promotion',
+        'Name on Ticket & Flyer',
+        'Token Of Appreciation'
       ],
-      themeColor: 'gold',
+      themeColor: 'bronze',
       delay: 0
     },
     {
@@ -25,9 +28,12 @@ const SponsorsSection = () => {
       amount: '$3000',
       benefits: [
         'Upto 4 VIP seats',
-        '3 minutes stage time',
-        'Static slides',
-        'Website mention'
+        'Stage Time(3 mins)',
+        'Flex/Stall Outside event venue',
+        'Slideshow Promotion',
+        'Social Media Promotion',
+        'Name on Flyer',
+        'Token Of Appreciation'
       ],
       themeColor: 'platinum',
       delay: 0.15
@@ -38,11 +44,11 @@ const SponsorsSection = () => {
       amount: '$2000',
       benefits: [
         'Upto 2 VIP seats',
-        'Flier priority mentions',
-        'Thank you mention',
-        'Event booklet half page'
+        'Slideshow Promotion',
+        'Social Media Promotion',
+        'Name on Flyer',
       ],
-      themeColor: 'silver',
+      themeColor: 'gold',
       delay: 0.3
     },
     {
@@ -51,11 +57,11 @@ const SponsorsSection = () => {
       amount: '$1000',
       benefits: [
         '2 Priority seats',
-        '1 slide',
-        'Flier mentions',
-        'Event booklet quarter page'
+        'Slideshow Promotion',
+        'Social Media Promotion',
+        'Name on Flyer',
       ],
-      themeColor: 'bronze',
+      themeColor: 'silver',
       delay: 0.45
     }
   ];

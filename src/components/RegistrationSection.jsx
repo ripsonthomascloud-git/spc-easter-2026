@@ -35,9 +35,9 @@ const RegistrationSection = () => {
   // Calculate total payment
   const calculateTotal = () => {
     const ticketPrices = {
-      'general-admission': 75,
+      'general-admission': 60,
       'vip-single': 150,
-      'family-package': 225,
+      'family-package': 200,
       'vip-family-package': 500
     };
 
@@ -181,9 +181,9 @@ const RegistrationSection = () => {
               onChange={handleChange}
               required
             >
-              <option value="general-admission">General Admission - $75</option>
+              <option value="general-admission">General Admission - $60</option>
               <option value="vip-single">VIP Experience Single - $150</option>
-              <option value="family-package">Family Package - $225 per family</option>
+              <option value="family-package">Family Package - $200 per family</option>
               <option value="vip-family-package">VIP Family Package - $500 per family</option>
             </select>
           </div>

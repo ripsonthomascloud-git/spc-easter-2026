@@ -113,11 +113,11 @@
 }
 
 .bronze {
-  border-color: #CD7F32;
+  border-color: #800080;
 }
 
 .bronze::before {
-  background: linear-gradient(90deg, #CD7F32, #B8860B);
+  background: linear-gradient(90deg, #9F2B68, #BF40BF);
 }
 
 .tierHeader {
