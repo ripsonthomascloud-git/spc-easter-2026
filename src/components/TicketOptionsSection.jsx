@@ -52,6 +52,9 @@ const TicketOptionsSection = () => {
         const ticketSelect = document.getElementById('ticketType');
         if (ticketSelect) {
           ticketSelect.value = ticketType.toLowerCase().replaceAll(' ', '-');
+          // Trigger a change event so React picks up the state change
+          const event = new Event('change', { bubbles: true });
+          ticketSelect.dispatchEvent(event);
           ticketSelect.focus();
         }
       }, 800);

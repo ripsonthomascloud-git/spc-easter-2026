@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useFirebase } from '../hooks/useFirebase';
 import { useFormValidation } from '../hooks/useFormValidation';
 import TicketModal from './TicketModal';
@@ -32,8 +32,8 @@ const RegistrationSection = () => {
     resetForm
   } = useFormValidation(initialFormState);
 
-  // Calculate total payment
-  const calculateTotal = () => {
+  // Calculate total payment - memoized to recalculate when dependencies change
+  const totalAmount = useMemo(() => {
     const ticketPrices = {
       'general-admission': 60,
       'vip-single': 150,
@@ -42,7 +42,7 @@ const RegistrationSection = () => {
     };
 
     const basePrice = ticketPrices[formData.ticketType] || 0;
-    const numTickets = parseInt(formData.tickets);
+    const numTickets = parseInt(formData.tickets) || 1;
 
     // For family packages, price is flat. For individual tickets, multiply by number of tickets
     if (formData.ticketType === 'family-package' || formData.ticketType === 'vip-family-package') {
@@ -50,7 +50,7 @@ const RegistrationSection = () => {
     } else {
       return basePrice * numTickets;
     }
-  };
+  }, [formData.ticketType, formData.tickets]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +79,7 @@ const RegistrationSection = () => {
       ...formData,
       tickets: calculateTicketCount(), // Override with calculated ticket count
       paymentMethod: paymentMethod,
-      totalAmount: calculateTotal()
+      totalAmount: totalAmount
     };
 
     const result = await submitRegistration(submissionData);
@@ -279,7 +279,7 @@ const RegistrationSection = () => {
             </div>
             <div className={`${styles.summaryRow} ${styles.totalRow}`}>
               <span><strong>Total Amount:</strong></span>
-              <span><strong>${calculateTotal()}</strong></span>
+              <span><strong>${totalAmount}</strong></span>
             </div>
           </div>
 
