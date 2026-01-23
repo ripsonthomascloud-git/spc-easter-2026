@@ -205,7 +205,7 @@ const Admin = () => {
         </div>
         <div className={styles.statCard}>
           <h3>Total Revenue</h3>
-          <p className={styles.statNumber}>${totalRevenue.toFixed(2)}</p>
+          <p className={styles.statNumber}>${totalRevenue}</p>
         </div>
         <div className={styles.statCard}>
           <h3>General Admission Tickets</h3>
@@ -275,7 +275,7 @@ const Admin = () => {
                   <td>{reg.phone || 'N/A'}</td>
                   <td>{formatTicketType(reg.ticketType)}</td>
                   <td>{reg.tickets}</td>
-                  <td>${(reg.totalAmount || 0).toFixed(2)}</td>
+                  <td>${(reg.totalAmount || 0)}</td>
                   <td>{formatPaymentMethod(reg.paymentMethod)}</td>
                   <td className={styles.specialNeeds}>
                     {reg.specialNeeds || 'None'}

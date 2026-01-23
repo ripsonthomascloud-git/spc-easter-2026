@@ -7,7 +7,7 @@ const TicketOptionsSection = () => {
 
   const tickets = [
     {
-      title: 'VIP Family ',
+      title: 'VIP Family Package',
       price: '$500',
       features: [
         'Premium Family Seating ,Admits 4'
@@ -51,7 +51,7 @@ const TicketOptionsSection = () => {
       setTimeout(() => {
         const ticketSelect = document.getElementById('ticketType');
         if (ticketSelect) {
-          ticketSelect.value = ticketType.toLowerCase().replace(' ', '-');
+          ticketSelect.value = ticketType.toLowerCase().replaceAll(' ', '-');
           ticketSelect.focus();
         }
       }, 800);

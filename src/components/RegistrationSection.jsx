@@ -215,7 +215,7 @@ const RegistrationSection = () => {
             />
           </div>
 
-          <div className={styles.formGroup}>
+          {/* <div className={styles.formGroup}>
             <label htmlFor="specialNeeds">Special Needs or Requests</label>
             <textarea
               id="specialNeeds"
@@ -225,7 +225,7 @@ const RegistrationSection = () => {
               rows="4"
               placeholder="Please let us know if you have any special requirements"
             />
-          </div>
+          </div> */}
 
           {/* Payment Method Selection */}
           <div className={styles.formGroup}>
@@ -252,11 +252,15 @@ const RegistrationSection = () => {
               <p><strong>Zelle:</strong> stpaulschoir.treasurer@ gmail.com</p>
               <p><strong>Venmo:</strong> @stpaulschoir</p>
               <p><strong>Cash/Check:</strong> Pay in Person, payable to <b>St. Pauls MTC Choir</b></p>
-              {paymentMethod === 'credit-card' && (
-                <p className={styles.creditCardNote}>
-                  <em><strong>Credit Card:</strong>You will be redirected to our secure payment portal to complete your credit card payment.</em>
+              <p><strong>Credit Card:</strong>You will be redirected to our secure payment portal to complete your credit card payment.</p>
+              {/* {paymentMethod === 'credit-card' && ( */}
+                  <em><p><strong>Please include the Payer's name(s) in the payment note when selecting online options</strong></p></em>
+                                  <p className={styles.creditCardNote}>
+
+                                    <em><strong>Please pay using one of the above options before completing registration</strong></em>
+
                 </p>
-              )}
+              {/* )} */}
             </div>
           </div>
 
