@@ -61,9 +61,23 @@ const RegistrationSection = () => {
 
     resetState();
 
+    // Calculate actual number of tickets based on ticket type
+    const calculateTicketCount = () => {
+      const numTickets = parseInt(formData.tickets);
+
+      // Family packages: multiply by 4
+      if (formData.ticketType === 'family-package' || formData.ticketType === 'vip-family-package') {
+        return numTickets * 4;
+      }
+
+      // General admission and VIP single: use as-is
+      return numTickets;
+    };
+
     // Prepare submission data with payment method and total
     const submissionData = {
       ...formData,
+      tickets: calculateTicketCount(), // Override with calculated ticket count
       paymentMethod: paymentMethod,
       totalAmount: calculateTotal()
     };

@@ -67,7 +67,8 @@ const Admin = () => {
     const types = {
       'general-admission': 'General Admission',
       'vip-single': 'VIP Experience Single',
-      'family-package': 'Family Package'
+      'family-package': 'Family Package',
+      'vip-family-package': 'VIP Family Package'
     };
     return types[type] || type;
   };
@@ -83,16 +84,28 @@ const Admin = () => {
     return matchesSearch && matchesFilter;
   });
 
+  const formatPaymentMethod = (method) => {
+    const methods = {
+      'zelle': 'Zelle',
+      'venmo': 'Venmo',
+      'cash': 'Cash',
+      'check': 'Check',
+      'credit-card': 'Credit Card'
+    };
+    return methods[method] || method || 'N/A';
+  };
+
   const exportToCSV = () => {
-    const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Ticket Type', 'Adults', 'Children', 'Special Needs', 'Registered At', 'Status'];
+    const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Ticket Type', 'Tickets', 'Total Amount', 'Payment Method', 'Special Needs', 'Registered At', 'Status'];
     const csvData = filteredRegistrations.map(reg => [
       reg.firstName,
       reg.lastName,
       reg.email,
       reg.phone || '',
       formatTicketType(reg.ticketType),
-      reg.adults,
-      reg.children,
+      reg.tickets,
+      `$${(reg.totalAmount || 0).toFixed(2)}`,
+      formatPaymentMethod(reg.paymentMethod),
       reg.specialNeeds || '',
       formatDate(reg.registeredAt),
       reg.status || 'confirmed'
@@ -121,8 +134,20 @@ const Admin = () => {
   };
 
   const totalAttendees = filteredRegistrations.reduce((sum, reg) => {
-    return sum + (parseInt(reg.adults) || 0) + (parseInt(reg.children) || 0);
+    return sum + (parseInt(reg.tickets) || 0);
   }, 0);
+
+  const totalRevenue = filteredRegistrations.reduce((sum, reg) => {
+    return sum + (parseFloat(reg.totalAmount) || 0);
+  }, 0);
+
+  const generalAdmissionTickets = registrations
+    .filter(r => r.ticketType === 'general-admission' || r.ticketType === 'family-package')
+    .reduce((sum, reg) => sum + (parseInt(reg.tickets) || 0), 0);
+
+  const vipTickets = registrations
+    .filter(r => r.ticketType === 'vip-single' || r.ticketType === 'vip-family-package')
+    .reduce((sum, reg) => sum + (parseInt(reg.tickets) || 0), 0);
 
   if (authLoading) {
     return (
@@ -179,16 +204,16 @@ const Admin = () => {
           <p className={styles.statNumber}>{totalAttendees}</p>
         </div>
         <div className={styles.statCard}>
-          <h3>General Admission</h3>
-          <p className={styles.statNumber}>
-            {registrations.filter(r => r.ticketType === 'general-admission').length}
-          </p>
+          <h3>Total Revenue</h3>
+          <p className={styles.statNumber}>${totalRevenue.toFixed(2)}</p>
+        </div>
+        <div className={styles.statCard}>
+          <h3>General Admission Tickets</h3>
+          <p className={styles.statNumber}>{generalAdmissionTickets}</p>
         </div>
         <div className={styles.statCard}>
           <h3>VIP Tickets</h3>
-          <p className={styles.statNumber}>
-            {registrations.filter(r => r.ticketType === 'vip-single').length}
-          </p>
+          <p className={styles.statNumber}>{vipTickets}</p>
         </div>
       </div>
 
@@ -211,6 +236,7 @@ const Admin = () => {
           <option value="general-admission">General Admission</option>
           <option value="vip-single">VIP Experience</option>
           <option value="family-package">Family Package</option>
+          <option value="vip-family-package">VIP Family Package</option>
         </select>
         <button onClick={exportToCSV} className={styles.exportButton}>
           Export to CSV
@@ -228,8 +254,9 @@ const Admin = () => {
               <th>Email</th>
               <th>Phone</th>
               <th>Ticket Type</th>
-              <th>Adults</th>
-              <th>Children</th>
+              <th>Tickets</th>
+              <th>Total Amount</th>
+              <th>Payment Method</th>
               <th>Special Needs</th>
               <th>Registered At</th>
               <th>Status</th>
@@ -238,7 +265,7 @@ const Admin = () => {
           <tbody>
             {filteredRegistrations.length === 0 ? (
               <tr>
-                <td colSpan="9" className={styles.noData}>No registrations found</td>
+                <td colSpan="10" className={styles.noData}>No registrations found</td>
               </tr>
             ) : (
               filteredRegistrations.map((reg) => (
@@ -247,8 +274,9 @@ const Admin = () => {
                   <td>{reg.email}</td>
                   <td>{reg.phone || 'N/A'}</td>
                   <td>{formatTicketType(reg.ticketType)}</td>
-                  <td>{reg.adults}</td>
-                  <td>{reg.children}</td>
+                  <td>{reg.tickets}</td>
+                  <td>${(reg.totalAmount || 0).toFixed(2)}</td>
+                  <td>{formatPaymentMethod(reg.paymentMethod)}</td>
                   <td className={styles.specialNeeds}>
                     {reg.specialNeeds || 'None'}
                   </td>
