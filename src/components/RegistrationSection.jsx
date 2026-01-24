@@ -244,7 +244,24 @@ const RegistrationSection = () => {
               <option value="credit-card">Credit Card</option>
             </select>
           </div>
-
+      {/* Payment Summary */}
+          <div className={styles.paymentSummary}>
+            <h3>Payment Summary</h3>
+            <div className={styles.summaryRow}>
+              <span>Ticket Type:</span>
+              <span>{formData.ticketType === 'general-admission' ? 'General Admission' :
+                     formData.ticketType === 'vip-single' ? 'VIP Experience Single' :
+                     formData.ticketType === 'family-package' ? 'Family Package' : 'VIP Family Package'}</span>
+            </div>
+            <div className={styles.summaryRow}>
+              <span>Number of Tickets:</span>
+              <span>{formData.tickets}</span>
+            </div>
+            <div className={`${styles.summaryRow} ${styles.totalRow}`}>
+              <span><strong>Total Amount:</strong></span>
+              <span><strong>${totalAmount}</strong></span>
+            </div>
+          </div>
           {/* Payment Instructions */}
           <div className={styles.paymentInstructions}>
             <h3>Payment Instructions</h3>
@@ -264,24 +281,7 @@ const RegistrationSection = () => {
             </div>
           </div>
 
-          {/* Payment Summary */}
-          <div className={styles.paymentSummary}>
-            <h3>Payment Summary</h3>
-            <div className={styles.summaryRow}>
-              <span>Ticket Type:</span>
-              <span>{formData.ticketType === 'general-admission' ? 'General Admission' :
-                     formData.ticketType === 'vip-single' ? 'VIP Experience Single' :
-                     formData.ticketType === 'family-package' ? 'Family Package' : 'VIP Family Package'}</span>
-            </div>
-            <div className={styles.summaryRow}>
-              <span>Number of Tickets:</span>
-              <span>{formData.tickets}</span>
-            </div>
-            <div className={`${styles.summaryRow} ${styles.totalRow}`}>
-              <span><strong>Total Amount:</strong></span>
-              <span><strong>${totalAmount}</strong></span>
-            </div>
-          </div>
+    
 
 
           <button type="submit" className={styles.submitButton} disabled={loading}>
