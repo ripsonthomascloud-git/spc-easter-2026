@@ -40,10 +40,31 @@
 .heroSubtitle {
   font-family: 'Cinzel', serif;
   font-size: 1.5rem;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   opacity: 0.95;
   animation: fadeInUp 1s ease-out 0.3s both;
   letter-spacing: 1.5px;
+  font-weight: 400;
+}
+
+.sponsorLogo {
+  max-width: 250px;
+  height: 10;
+  margin: 0 auto 0px;
+  display: block;
+  opacity: 0.95;
+  animation: fadeInUp 1s ease-out 0.4s both;
+  filter: brightness(1.1);
+}
+
+.presentsText {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 30px;
+  opacity: 0.95;
+  animation: fadeInUp 1s ease-out 0.5s both;
+  letter-spacing: 1.2px;
   font-weight: 400;
 }
 
@@ -95,6 +116,15 @@
     font-size: 1.2rem;
     letter-spacing: 1px;
   }
+
+  .sponsorLogo {
+    max-width: 180px;
+  }
+
+  .presentsText {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -111,6 +141,15 @@
   }
 
   .heroSubtitle {
+    font-size: 1rem;
+    letter-spacing: 0.8px;
+  }
+
+  .sponsorLogo {
+    max-width: 150px;
+  }
+
+  .presentsText {
     font-size: 1rem;
     letter-spacing: 0.8px;
   }

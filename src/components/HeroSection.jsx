@@ -14,7 +14,9 @@ const HeroSection = () => {
     <section id="hero" className={styles.heroSection}>
       <div className={styles.container}>
         <div className={styles.heroContent}>
-          <p className={styles.heroSubtitle}>St. Pauls Marthoma Church, Dallas Presents</p>
+          <p className={styles.heroSubtitle}>St. Pauls Marthoma Church, Dallas In Association With </p>
+          <img src="/joyalukkas-logo-hd.png" alt="Joyalukkas" className={styles.sponsorLogo} />
+          <p className={styles.presentsText}>Presents</p>
           <h1 className={styles.heroTitle}>The Ultimate Sacrifice on Golgotha</h1>
            <p className={styles.heroTitle}>ഗോൽഗോഥായിലെ പരമയാഗം</p>
 
