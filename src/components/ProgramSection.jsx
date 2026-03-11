@@ -10,7 +10,7 @@ const ProgramSection = () => {
     {
       time: '6:00 PM',
       title: 'Registration',
-      description: 'Registratioon Counter Opens'
+      description: 'Registration Counter Opens'
     },
     {
       time: '6:30 PM',
