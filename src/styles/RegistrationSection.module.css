@@ -27,6 +27,28 @@
   margin-right: auto;
 }
 
+.registrationClosedBanner {
+  text-align: center;
+  background-color: #fff3cd;
+  border: 2px solid #f0a500;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin: 0 auto 40px;
+  max-width: 700px;
+  color: #7a5300;
+}
+
+.registrationClosedBanner strong {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.registrationClosedBanner p {
+  font-size: 1rem;
+  margin: 0;
+}
+
 .registrationForm {
   max-width: 700px;
   margin: 0 auto;

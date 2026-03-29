@@ -37,10 +37,10 @@ const TicketCard = ({
         ))}
       </ul>
       <button
-        className={`${styles.selectButton} ${isPopular ? styles.popularButton : ''}`}
-        onClick={onSelectTicket}
+        className={`${styles.selectButton} ${styles.soldOutButton}`}
+        disabled
       >
-        Select Ticket
+        Sold Out
       </button>
     </div>
   );

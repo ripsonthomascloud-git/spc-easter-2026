@@ -6,7 +6,7 @@ export const EVENT_CONFIG = {
   date: 'April 4, 2026',
   time: '6:00 PM',
   location: 'Sharon Event Center, 940 Barnes Bridge Rd, Mesquite, TX 75150',
-  organizerEmail: 'stpmtcdallas@outlook.com'
+  organizerEmail: 'stpaulschoir.treasurer@gmail.com'
 };
 
 /**

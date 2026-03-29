@@ -10,7 +10,7 @@ const SponsorTier = ({
   delay = 0
 }) => {
   const handleBecomeSponsor = () => {
-    const email = 'stpmtcdallas@outlook.com';
+    const email = 'stpaulschoir.treasurer@gmail.com';
     const subject = `${tier} Sponsorship Inquiry - Easter 2026`;
     const body = `Hello,\n\nI am interested in becoming a ${tier} for the SPC Easter 2026 event.\n\nPlease provide more information about the sponsorship opportunities.\n\nThank you!`;
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

@@ -86,10 +86,10 @@ const SponsorsSection = () => {
             Interested in a custom sponsorship package?
           </p>
           <a
-            href="mailto:stpmtcdallas@outlook.com"
+            href="mailto:stpaulschoir.treasurer@gmail.com"
             className={styles.ctaLink}
           >
-            Contact us at stpmtcdallas@outlook.com
+            Contact us at stpaulschoir.treasurer@gmail.com
           </a>
         </div>
       </div>

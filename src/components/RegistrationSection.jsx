@@ -7,7 +7,7 @@ import styles from '../styles/RegistrationSection.module.css';
 const RegistrationSection = () => {
   const { loading, error, success, submitRegistration, resetState } = useFirebase();
   const formMessageRef = useRef(null);
-  const [paymentMethod, setPaymentMethod] = useState('zelle'); // 'zelle', 'venmo', or 'credit-card'
+  const [paymentMethod, setPaymentMethod] = useState('credit-card'); // 'zelle', 'venmo', or 'credit-card'
   const [showTicketModal, setShowTicketModal] = useState(false);
   const [ticketData, setTicketData] = useState(null);
   const [pendingCreditCardRedirect, setPendingCreditCardRedirect] = useState(false);
@@ -113,7 +113,7 @@ const RegistrationSection = () => {
 
     // Otherwise, reset form and show success message
     resetForm();
-    setPaymentMethod('zelle');
+    setPaymentMethod('credit-card');
 
     // Scroll to success message
     setTimeout(() => {
@@ -127,9 +127,10 @@ const RegistrationSection = () => {
     <section id="registration" className={styles.registrationSection}>
       <div className={styles.container}>
         <h2 className={styles.sectionTitle}>Event Registration</h2>
-        <p className={styles.registrationIntro}>
-          Pre-register for the Easter 2026 event to help us prepare for your attendance
-        </p>
+        <div className={styles.registrationClosedBanner}>
+          <strong>All New Registrations are Closed.</strong>
+          <p>If you still need to pay for an already purchased ticket, please use the Credit Card payment option below.</p>
+        </div>
 
         <form onSubmit={handleSubmit} className={styles.registrationForm}>
           <div className={styles.formRow}>
@@ -237,10 +238,6 @@ const RegistrationSection = () => {
               onChange={(e) => setPaymentMethod(e.target.value)}
               required
             >
-              <option value="zelle">Zelle</option>
-              <option value="venmo">Venmo</option>
-              <option value="cash">Cash</option>
-              <option value="check">Check</option>
               <option value="credit-card">Credit Card</option>
             </select>
           </div>
